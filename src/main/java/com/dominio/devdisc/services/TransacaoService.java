@@ -22,6 +22,7 @@ public class TransacaoService {
     private final ClienteRepository clienteRepository;
     private final TransacaoRepository transacaoRepository;
 
+
     public List<TransacaoDTO> listarTodas() {
         return transacaoRepository.findAll()
                 .stream()
@@ -29,10 +30,12 @@ public class TransacaoService {
                 .toList();
     }
 
+
     public TransacaoDTO buscarPorId(Long id) {
         Transacao transacao = getByIdOrThrow(id);
         return TransacaoMapper.toDTO(transacao);
     }
+
 
     public TransacaoDTO registrarTransacao(TransacaoDTO dto) {
         Cliente cliente = clienteRepository.findById(dto.getCliente().getId())
@@ -61,10 +64,12 @@ public class TransacaoService {
         return TransacaoMapper.toDTO(salva);
     }
 
+
     public void deletar(Long id) {
         getByIdOrThrow(id);
         transacaoRepository.deleteById(id);
     }
+
 
     private Transacao getByIdOrThrow(Long id) {
         return transacaoRepository.findById(id)

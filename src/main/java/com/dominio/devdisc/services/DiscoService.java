@@ -21,16 +21,19 @@ public class DiscoService {
                 .toList();
     }
 
+
     public DiscoDTO buscarPorId(Long id) {
         Disco disco = getByIdOrThrow(id);
         return DiscoMapper.toDTO(disco);
     }
+
 
     public DiscoDTO salvar(DiscoDTO dto) {
         Disco disco = DiscoMapper.toEntity(dto);
         Disco salvo = discoRepository.save(disco);
         return DiscoMapper.toDTO(salvo);
     }
+
 
     public DiscoDTO atualizar(Long id, DiscoDTO dto) {
         Disco existente = getByIdOrThrow(id);
@@ -39,10 +42,12 @@ public class DiscoService {
         return DiscoMapper.toDTO(atualizado);
     }
 
+
     public void deletar(Long id) {
         getByIdOrThrow(id);
         discoRepository.deleteById(id);
     }
+
 
     private static void copyToEntity(DiscoDTO dto, Disco existente) {
         existente.setTitulo(dto.getTitulo());
@@ -52,6 +57,7 @@ public class DiscoService {
         existente.setCapaUrl(dto.getCapaUrl());
         existente.setGenero(DiscoMapper.toEntity(dto).getGenero());
     }
+
 
     private Disco getByIdOrThrow(Long id) {
         return discoRepository.findById(id).orElseThrow(
